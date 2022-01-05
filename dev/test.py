@@ -9,6 +9,10 @@ z=[]
 i=[]
 j=[]
 k=[]
+x1=[]
+y1=[]
+z1=[]
+liner=[]
 with open('/home/fnoic/PycharmProjects/python-mesh-raycast/data/tri_sphere_simple.obj') as of:
     for line in of:
         if line.startswith('v'):
@@ -16,26 +20,34 @@ with open('/home/fnoic/PycharmProjects/python-mesh-raycast/data/tri_sphere_simpl
             y.append(float(line.split()[2]))
             z.append(float(line.split()[3]))
         elif line.startswith('f'):
-            i.append(int(line.split()[1])-1)
-            j.append(int(line.split()[2])-1)
-            k.append(int(line.split()[3])-1)
+            i_temp = int(line.split()[1])-1
+            i.append(i_temp)
+            liner.append([x[i_temp], y[i_temp], z[i_temp]])
+            j_temp = int(line.split()[2])-1
+            j.append(j_temp)
+            liner.append([x[j_temp], y[j_temp], z[j_temp]])
+            k_temp = int(line.split()[3])-1
+            k.append(k_temp)
+            liner.append([x[k_temp], y[k_temp], z[k_temp]])
     a = 0
 
-triangles = np.array([x, y, z], dtype='f4').T
+triangles = np.array(liner, dtype='f4')
 triangles = triangles.copy(order='C')
+# triangles = np.array([x, y, z], dtype='f4').T
+# triangles = triangles.copy(order='C')
 
-triangles1 = np.array(
-    [
-        [0.0, 0.0, 0.0],
-        [1.0, 0.0, 0.0],
-        [0.0, 1.0, 0.0],
-        [1.0, 1.0, 10.0],
-        [3.0, 7.0, 10.0],
-        [0.0, 3.0, 10.0]
-    ],
-    dtype='f4')
+# triangles1 = np.array(
+#     [
+#         [0.0, 0.0, 0.0],
+#         [1.0, 0.0, 0.0],
+#         [0.0, 1.0, 0.0],
+#         [1.0, 1.0, 10.0],
+#         [3.0, 7.0, 10.0],
+#         [0.0, 3.0, 10.0]
+#     ],
+#     dtype='f4')
 #
-# x, y, z = triangles.T
+x, y, z = triangles.T
 
 fig = go.Figure(data=[
     go.Mesh3d(
@@ -57,8 +69,9 @@ fig = go.Figure(data=[
 ])
 fig.show()
 
-index = np.array([
-    [0, 1, 2],
-], dtype='i4')
+# index = np.array([
+#     [0, 1, 2],
+# ], dtype='i4')
 
-print(mesh_raycast.raycast((0.0, 0.0, 2.0), mesh_raycast.normalize((0.1, 0.2, -1.0)), triangles))
+result = mesh_raycast.raycast(source=(0.4, 0.8, 5.0), direction=(0.0, 0.0, -1.0), mesh=triangles)
+a=0
