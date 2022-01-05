@@ -29,10 +29,11 @@ with open('/home/fnoic/PycharmProjects/python-mesh-raycast/data/tri_sphere_simpl
             k_temp = int(line.split()[3])-1
             k.append(k_temp)
             liner.append([x[k_temp], y[k_temp], z[k_temp]])
+            b=0
     a = 0
 
 triangles = np.array(liner, dtype='f4')
-triangles = triangles.copy(order='C')
+#triangles = triangles.copy(order='C')
 # triangles = np.array([x, y, z], dtype='f4').T
 # triangles = triangles.copy(order='C')
 
