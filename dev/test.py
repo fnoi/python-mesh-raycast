@@ -9,11 +9,11 @@ z=[]
 i=[]
 j=[]
 k=[]
-x1=[]
-y1=[]
-z1=[]
+#x1=[]
+#y1=[]
+#z1=[]
 liner=[]
-with open('/Users/fnoic/PycharmProjects/python-mesh-raycast/data/box.obj') as of:
+with open('/Users/fnoic/PycharmProjects/python-mesh-raycast/data/tri_sphere_simple.obj') as of:
 #with open('/home/fnoic/PycharmProjects/python-mesh-raycast/data/tri_sphere_simple.obj') as of:
     for line in of:
         if line.startswith('v'):
@@ -49,22 +49,28 @@ triangles = np.array(liner, dtype='f4')
 #     ],
 #     dtype='f4')
 #
-x, y, z = triangles.T
+x1, y1, z1 = triangles.T
+num_nodes_single = int(len(liner))
+f_ind = np.array([i for i in range(num_nodes_single)])
+i1=(np.arange(0, num_nodes_single, 3)).tolist()
+j1=(np.arange(1, num_nodes_single, 3)).tolist()
+k1=(np.arange(2, num_nodes_single, 3)).tolist()
+
 
 fig = go.Figure(data=[
     go.Mesh3d(
-        x=x,
-        y=y,
-        z=z,
+        x=x1,
+        y=y1,
+        z=z1,
         # colorbar_title='z',
         # colorscale=[[0, 'gold'],
         #            [0.5, 'mediumturquoise'],
         #            [1, 'magenta']],
         # intensity = np.linspace(0, 1, 12, endpoint=True),
         # intensitymode='cell',
-        i=i, #[0, 3, 0, 2],
-        j=j, #[1, 4, 1, 4],
-        k=k, #[2, 5, 5, 1],
+        i=i1,
+        j=j1,
+        k=k1,
         name='y',
         showscale=True
     )
