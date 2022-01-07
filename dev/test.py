@@ -13,7 +13,8 @@ x1=[]
 y1=[]
 z1=[]
 liner=[]
-with open('/home/fnoic/PycharmProjects/python-mesh-raycast/data/tri_sphere_simple.obj') as of:
+with open('/Users/fnoic/PycharmProjects/python-mesh-raycast/data/box.obj') as of:
+#with open('/home/fnoic/PycharmProjects/python-mesh-raycast/data/tri_sphere_simple.obj') as of:
     for line in of:
         if line.startswith('v'):
             x.append(float(line.split()[1]))
